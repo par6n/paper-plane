@@ -9,7 +9,7 @@ Paper Plane is a solution for interacting with TDLib through Node.js. It's compl
 3. Load the package and start using it.
 
 ## Example
-A fully functioning but simple client is available at [`example/`](https://github.com/tdlib/td/tree/master/example) directory. Before using it, make sure you have an app in [Telegram Development Tools](https://my.telegram.org). Set `TD_API_ID` and `TD_API_HASH` env. variables with proper values.
+A fully functioning but simple client is available at [`example/`](https://github.com/BlackSuited/paper-plane/tree/master/example) directory. Before using it, make sure you have an app in [Telegram Development Tools](https://my.telegram.org). Set `TD_API_ID` and `TD_API_HASH` env. variables with proper values.
 
 ## Documentation
 * [TDLib](https://core.telegram.org/tdlib/)
