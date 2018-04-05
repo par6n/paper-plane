@@ -1,0 +1,22 @@
+{
+  "name": "tg-paper-plane",
+  "version": "0.0.2",
+  "description": "TDLib bindings for Node.js",
+  "main": "src/client.js",
+  "keywords": [
+    "telegram",
+    "bindings",
+    "ffi"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/BlackSuited/paper-plane"
+  },
+  "author": "BlackSuited <theblacksuited@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ffi-napi": "^2.4.3",
+    "ref-napi": "^1.4.0",
+    "uuid": "^3.2.1"
+  }
+}
