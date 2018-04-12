@@ -1,12 +1,10 @@
 {
   "name": "tg-paper-plane",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "TDLib bindings for Node.js",
-  "main": "lib/client.js",
+  "main": "src/client.js",
   "scripts": {
-    "compile": "babel -d lib/ src/",
-    "prepublish": "npm run compile",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified because of TDlib heavy building process.\" && exit 1"
   },
   "keywords": [
     "telegram",
@@ -24,9 +22,7 @@
     "ref-napi": "^1.4.0",
     "uuid": "^3.2.1"
   },
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1"
+  "engines": {
+    "node": ">=8.0.0"
   }
 }
