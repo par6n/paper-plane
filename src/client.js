@@ -157,10 +157,10 @@ class Client extends EventEmitter {
      */
     async _handleUpdate( update ) {
         const id = update[ '@extra' ]
-        if ( id && this.fetching[ id ] ) {
+        if ( id && this._fetching[ id ] ) {
             delete update[ '@extra' ]
-            this.fetching[ id ]( update )
-            delete this.fetching[ id ]
+            this._fetching[ id ]( update )
+            delete this._fetching[ id ]
         } else {
             this.emit( 'update', update )
         }
@@ -179,10 +179,10 @@ class Client extends EventEmitter {
         const id = uuid()
         query[ '@extra' ] = id
         const receiver = new Promise( ( resolve, reject ) => {
-            this.fetching[ id ] = resolve
+            this._fetching[ id ] = resolve
 
             setTimeout( () => {
-                delete this.fetching[ id ]
+                delete this._fetching[ id ]
                 reject( 'Query timed out' )
             }, 1000 * 10 )
         } )
