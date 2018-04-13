@@ -16,6 +16,9 @@ A fully functioning but simple client is available at [`example/`](https://githu
 TDlib has a complete [documentation of methods, types and everything else in the library](https://core.telegram.org/tdlib/).
 
 ## Changelog
+#### v0.0.5
+* Call `this.resolver` when an AuthReady received from TDlib.
+
 #### v0.0.4
 * Removed Babel from dependencies,
 * Set Node.js required version to `>=8.0.0`,

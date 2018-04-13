@@ -123,6 +123,9 @@ class Client extends EventEmitter {
                 'parameters': params
             } )
         }
+        if ( update[ 'authorization_state' ][ '@type' ] == 'authorizationStateReady' ) {
+            return this.resolver()
+        }
     }
 
     /**
