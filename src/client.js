@@ -17,9 +17,10 @@ class Client extends EventEmitter {
      * @param {string} binaryPath Path to libtdjson binary
      * @param {object} options Parameters that must be passed to TDlib.
      * @param {int} verbosityLevel
+     * @param {string} encryptionKey Database cryption key
      * @return {void}
      */
-    constructor( binaryPath, options = {}, verbosityLevel = 2 ) {
+    constructor( binaryPath, options = {}, verbosityLevel = 2, encryptionKey = '' ) {
         super()
         const defaultOptions = {
             'use_message_database':     true,
@@ -36,6 +37,7 @@ class Client extends EventEmitter {
         }
         this.options = Object.assign( defaultOptions, options )
         this.verbosityLevel = verbosityLevel
+        this.encryptionKey = encryptionKey
 
         this.td = ffi.Library(
             binaryPath, {
@@ -104,7 +106,7 @@ class Client extends EventEmitter {
             }
         }
 
-        return this._loop()
+        this._loop()
     }
 
     /**
@@ -116,15 +118,32 @@ class Client extends EventEmitter {
      * @param {object} update Update received
      */
     async _handleAuth( update ) {
-        if ( update[ 'authorization_state' ][ '@type' ] == 'authorizationStateWaitTdlibParameters' ) {
-            const params = Object.assign( this.options, { '@type': 'tdLibParameters' } )
-            await this.send( {
-                '@type': 'setTdlibParameters',
-                'parameters': params
-            } )
-        }
-        if ( update[ 'authorization_state' ][ '@type' ] == 'authorizationStateReady' ) {
-            return this.resolver()
+        switch( update[ 'authorization_state' ][ '@type' ] ) {
+            case 'authorizationStateWaitTdlibParameters': {
+                const params = Object.assign( this.options, { '@type': 'tdLibParameters' } )
+                await this.send( {
+                    '@type': 'setTdlibParameters',
+                    'parameters': params
+                } )
+                break
+            }
+            case 'authorizationStateWaitEncryptionKey': {
+                if ( ! update.authorization_state.is_encrypted ) {
+                    await this.send( {
+                        '@type': 'checkDatabaseEncryptionKey'
+                    } )
+                } else {
+                    await this.send( {
+                        '@type': 'checkDatabaseEncryptionKey',
+                        'encryption_key': this.encryptionKey
+                    } )
+                }
+                break
+            }
+            case 'authorizationStateReady': {
+                this.resolver()
+                break
+            }
         }
     }
 

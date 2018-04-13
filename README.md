@@ -16,6 +16,9 @@ A fully functioning but simple client is available at [`example/`](https://githu
 TDlib has a complete [documentation of methods, types and everything else in the library](https://core.telegram.org/tdlib/).
 
 ## Changelog
+#### v0.0.6
+* Added encryptionKey parameter to class constructor, so the class can be used for encrypted databases, too. Also, `authorizationWaitEncryptionKey` is automatically handled by Paper Plane.
+
 #### v0.0.5
 * Call `this.resolver` when an AuthReady received from TDlib.
 
