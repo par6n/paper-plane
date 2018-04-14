@@ -16,6 +16,9 @@ A fully functioning but simple client is available at [`example/`](https://githu
 TDlib has a complete [documentation of methods, types and everything else in the library](https://core.telegram.org/tdlib/).
 
 ## Changelog
+#### v0.0.8
+* `fetch` function now handles errors correctly.
+
 #### v0.0.7
 * Fixed a minor typo with `this.fetching` which caused the whole client to stop working :)
 

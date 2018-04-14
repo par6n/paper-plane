@@ -96,13 +96,8 @@ class Client extends EventEmitter {
                 this.emit( 'authStateUpdate', update )
                 break
             }
-            case 'error': {
-                this.emit( 'tdError', update )
-                break
-            }
             default: {
                 await this._handleUpdate( update )
-                break
             }
         }
 
@@ -162,7 +157,10 @@ class Client extends EventEmitter {
             this._fetching[ id ]( update )
             delete this._fetching[ id ]
         } else {
-            this.emit( 'update', update )
+            if ( update[ '@type' ] == 'error' )
+                this.emit( 'tdError', update )
+            else
+                this.emit( 'update', update )
         }
     }
 

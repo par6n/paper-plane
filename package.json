@@ -1,6 +1,6 @@
 {
   "name": "tg-paper-plane",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "TDLib bindings for Node.js",
   "main": "src/client.js",
   "scripts": {
