@@ -16,6 +16,9 @@ A fully functioning but simple client is available at [`example/`](https://githu
 TDlib has a complete [documentation of methods, types and everything else in the library](https://core.telegram.org/tdlib/).
 
 ## Changelog
+#### v0.0.9
+* Added a `Promise.race` for async queries, so it won't return continuous `Time out` responses.
+
 #### v0.0.8
 * `fetch` function now handles errors correctly.
 

@@ -178,15 +178,15 @@ class Client extends EventEmitter {
         query[ '@extra' ] = id
         const receiver = new Promise( ( resolve, reject ) => {
             this._fetching[ id ] = resolve
-
-            setTimeout( () => {
-                delete this._fetching[ id ]
-                reject( 'Query timed out' )
-            }, 1000 * 10 )
         } )
-        await this.send( query )
-        const result = await receiver
-        return result
+
+        this.send( query )
+        return Promise.race( [ receiver, new Promise( ( resolve, reject ) => {
+            let id = setTimeout( () => {
+                clearTimeout( id )
+                reject( 'Query time out after 10 seconds' )
+            }, 10 * 1000 )
+        } ) ] )
     }
 
     /**
